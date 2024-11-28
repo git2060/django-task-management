@@ -1,0 +1,11 @@
+{% extends 'task/base.html' %}
+{% block content %}
+<form method="post" style="margin: 100;">
+{% csrf_token %}
+<h1>Please confirm</h1>
+</br>
+<button type="submit" class="btn btn-danger">yes Delete</button>
+
+<a href="{% url 'view_task' %}"><button type="button" class="btn btn-warning">cancel</button></a>
+</form>    
+{% endblock %}

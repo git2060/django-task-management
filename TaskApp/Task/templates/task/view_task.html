@@ -1,0 +1,85 @@
+{% extends 'task/base.html' %}
+{% block content %}
+</br></br>
+<h3>Add-Task: <a href="{% url 'add_task'%}" class="link-warning link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Add Task</a></h3>
+</br></br>
+<h3>List of Completed Task</h3> 
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Completed</th>
+            <th>Due Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Update Task Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if data %}
+        {% for dat in data %}
+        {% if dat.is_completed %}
+        <tr>
+            <td>{{dat.name}}</td>
+            <td>{{dat.description}}</td>
+            <td>{{dat.is_completed}}</td>
+            <td>{{dat.due_date}}</td>
+            <td><a href="{% url 'edit_task' dat.pk %}"><button type="button" class="btn btn-success">Edit</button></a></td>
+            <td><a href="{% url 'delete_task' dat.pk %}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+            {% if dat.is_completed %}
+            <td><a href="{% url 'update_task' dat.pk %}"><button type="button" class="btn btn-info">Uncompleted</button></a></td>
+            {% else %} 
+            <td><a href="{% url 'update_task' dat.pk %}"><button type="button" class="btn btn-info">Completed</button></a></td>
+            {% endif %}
+            
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        No data found
+        {% endif %}
+    </tbody>
+</table>
+
+<h3>List of Uncompleted Task</h3>  
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Completed</th>
+            <th>Due Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Update Task Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if data %}
+        {% for dat in data %}
+        {% if not dat.is_completed %}
+        <tr>
+            <td>{{dat.name}}</td>
+            <td>{{dat.description}}</td>
+            <td>{{dat.is_completed}}</td>
+            <td>{{dat.due_date}}</td>
+            <td><a href="{% url 'edit_task' dat.pk %}"><button type="button" class="btn btn-success">Edit</button></a></td>
+            <td><a  href="{% url 'delete_task' dat.pk %}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+            {% if dat.is_completed %}
+            <td><a href="{% url 'update_task' dat.pk %}"><button type="button" class="btn btn-info">Uncompleted</button></a></td>
+            {% else %} 
+            <td><a href="{% url 'update_task' dat.pk %}"><button type="button" class="btn btn-info">Completed</button></a></td>
+            {% endif %}
+            
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        No data found
+        {% endif %}
+    </tbody>
+</table>
+
+
+{% endblock %}
